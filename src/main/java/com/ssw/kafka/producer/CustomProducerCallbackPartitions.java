@@ -7,9 +7,9 @@ import java.util.Properties;
 
 /**
  * @author ssw
- * @date 2022/9/8 18:07
+ * @date 2022/9/8 19:29
  */
-public class CustomProducerCallback {
+public class CustomProducerCallbackPartitions {
     public static void main(String[] args) throws InterruptedException {
         // 1. 创建 kafka 生产者的配置对象
         Properties properties = new Properties();
@@ -23,13 +23,13 @@ public class CustomProducerCallback {
         // 3. 创建 kafka 生产者对象
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(properties);
         // 4. 调用 send 方法,发送消息
-        for (int i = 0; i < 5000; i++) {
-            kafkaProducer.send(new ProducerRecord<>("first", "hello kafka" + i), new Callback() {
+        for (int i = 0; i < 5; i++) {
+            kafkaProducer.send(new ProducerRecord<>("first", 2, "", "hello kafka" + i), new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata metadata, Exception exception) {
 
-                    if (exception == null){
-                        System.out.println("主题： "+metadata.topic() + " 分区： "+ metadata.partition());
+                    if (exception == null) {
+                        System.out.println("主题： " + metadata.topic() + " 分区： " + metadata.partition());
                     }
                 }
             });

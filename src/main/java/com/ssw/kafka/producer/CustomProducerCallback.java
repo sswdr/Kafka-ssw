@@ -25,7 +25,7 @@ public class CustomProducerCallback {
         // 4. 调用 send 方法,发送消息
         for (int i = 0; i < 5; i++) {
             // topic: first,value: hello kafka
-            kafkaProducer.send(new ProducerRecord<>("first", "hello kafka" + i), new Callback() {
+            kafkaProducer.send(new ProducerRecord<>("first", "hello kafka Callback" + i), new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata metadata, Exception exception) {
                     if (exception == null) {

@@ -37,13 +37,15 @@ public class CustomProducerTransactions {
             // 4. 调用 send 方法,发送消息
             for (int i = 0; i < 5; i++) {
                 // topic: first,value: hello kafka
-                kafkaProducer.send(new ProducerRecord<>("first", "hello kafka transactions " + UUID.randomUUID())).get();
+                kafkaProducer.send(new ProducerRecord<>("first", "hello kafka transactions01 " + UUID.randomUUID()));
+                // 注意，如果发送消息使用了.get()，那么事物将失效（能继续被发送到Kafka）
+                // kafkaProducer.send(new ProducerRecord<>("first", "hello kafka transactions02 " + UUID.randomUUID())).get();
             }
             int i = 1 / 0;
             // ③提交事物
             kafkaProducer.commitTransaction();
         } catch (Exception e) {
-            // 抛弃事物，回滚
+            // ④抛弃事物，回滚
             kafkaProducer.abortTransaction();
             System.out.println("出现异常，提交事物");
         }finally {

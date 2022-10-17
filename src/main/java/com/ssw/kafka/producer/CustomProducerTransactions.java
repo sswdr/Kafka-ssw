@@ -38,7 +38,7 @@ public class CustomProducerTransactions {
             for (int i = 0; i < 5; i++) {
                 // topic: first,value: hello kafka
                 kafkaProducer.send(new ProducerRecord<>("first", "hello kafka transactions01 " + UUID.randomUUID()));
-                // 注意，如果发送消息使用了.get()，那么事物将失效（能继续被发送到Kafka）
+                // 注意，如果发送消息使用了.get()[即同步发送]，那么事物将失效（能继续被发送到Kafka）
                 // kafkaProducer.send(new ProducerRecord<>("first", "hello kafka transactions02 " + UUID.randomUUID())).get();
             }
             int i = 1 / 0;

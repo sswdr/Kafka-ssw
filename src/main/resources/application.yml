@@ -1,0 +1,17 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    # 应用名称
+    name: SpringBoot-ssw-kafka
+  # 指定 kafka 的地址
+  kafka:
+    bootstrap-servers: ubuntu-20.04.wsl:9092
+    # 指定 key 和 value 的序列化器
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      # 指定消费者组的 group_id
+      group-id: ssw_group_id
